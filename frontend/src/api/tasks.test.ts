@@ -21,6 +21,7 @@ it("lists tasks with GET", async () => {
   const [url, init] = fetchMock.mock.calls[0];
   expect(url).toBe("/api/tasks");
   expect(init.method).toBe("GET");
+  expect(init.credentials).toBe("include");
 });
 
 it("creates a task without status", async () => {
@@ -40,6 +41,7 @@ it("creates a task without status", async () => {
   const [url, init] = fetchMock.mock.calls[0];
   expect(url).toBe("/api/tasks");
   expect(init.method).toBe("POST");
+  expect(init.credentials).toBe("include");
   expect(JSON.parse(init.body as string)).toEqual({ title: "买牛奶", description: "一瓶" });
 });
 
@@ -59,6 +61,7 @@ it("patches status", async () => {
   const [url, init] = fetchMock.mock.calls[0];
   expect(url).toBe("/api/tasks/3");
   expect(init.method).toBe("PATCH");
+  expect(init.credentials).toBe("include");
   expect(JSON.parse(init.body as string)).toEqual({ status: "done" });
 });
 
@@ -71,4 +74,5 @@ it("deletes a task", async () => {
   const [url, init] = fetchMock.mock.calls[0];
   expect(url).toBe("/api/tasks/3");
   expect(init.method).toBe("DELETE");
+  expect(init.credentials).toBe("include");
 });
