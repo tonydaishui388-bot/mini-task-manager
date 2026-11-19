@@ -47,6 +47,18 @@ describe("request", () => {
     });
   });
 
+  it("sends cookies and surfaces invalid credentials", async () => {
+    const fetchMock = vi.fn<(input: string, init?: RequestInit) => Promise<Response>>(
+      async () => jsonResponse(401, { detail: "Invalid credentials" }),
+    );
+    vi.stubGlobal("fetch", fetchMock);
+    await expect(request("/api/login", { method: "POST", body: "{}" })).rejects.toMatchObject({
+      status: 401,
+      message: "Invalid credentials",
+    });
+    expect(fetchMock.mock.calls[0][1]?.credentials).toBe("include");
+  });
+
   it("maps network failure", async () => {
     vi.stubGlobal(
       "fetch",

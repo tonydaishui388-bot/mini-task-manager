@@ -24,6 +24,18 @@ h1 {
   font-size: 1.75rem;
 }
 
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.app-header h1 {
+  margin: 0;
+}
+
 h2,
 .task-title {
   margin: 0 0 12px;
@@ -65,6 +77,16 @@ button {
   background: #1c1917;
   color: #ffffff;
   cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.logout-button {
+  background: #ffffff;
+  color: #1c1917;
 }
 
 .form-error {
